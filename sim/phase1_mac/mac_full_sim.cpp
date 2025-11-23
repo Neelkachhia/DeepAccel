@@ -1,6 +1,7 @@
 #include<iostream>
 #include<queue>
-
+#include<vector> //for future use
+#include<cmath>
 using namespace std;
 
 int main()
