@@ -1,6 +1,7 @@
 #include<iostream>
 #include<queue>
 #include <utility>
+#include<vector> //for future use
 using namespace std;
 
 struct DramRequest
