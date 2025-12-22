@@ -52,3 +52,56 @@ plt.legend()
 plt.grid(True)
 plt.savefig("plots/memory_traffic_VS_tile_size.png")
 plt.close()
+
+#Roofline Model
+
+BYTES_PER_WORD = 4
+DRAM_BW_BYTES_PER_CYCLE = 4 * BYTES_PER_WORD # 16 Bytes/cycle
+PEAK_MACS_PER_CYCLE = 16  # 4x4 PE array
+
+#Operational Intensity
+
+df["dram_bytes"] = df["dram_words"] * BYTES_PER_WORD
+df["operational_intensity"] = df["macs"] / df["dram_bytes"]
+
+#Achieved performance
+
+df["achieved_macs_per_cycle"] = df["macs"] / df["cycles"]
+
+#Memory Roof
+df["memory_roof"] = df["operational_intensity"] * DRAM_BW_BYTES_PER_CYCLE
+
+#compute roof (flat line)
+df["compute_roof"] = PEAK_MACS_PER_CYCLE
+
+#plot roofline
+plt.figure()
+plt.loglog(
+  df["operational_intensity"],
+  df["achieved_macs_per_cycle"],
+  marker = 'o',
+  label="Achieved Performance"
+)
+
+plt.loglog(
+  df["operational_intensity"],
+  df["memory_roof"],
+  linestyle = '--',
+  label = "Memory Roof",
+)
+
+plt.axhline(
+  PEAK_MACS_PER_CYCLE,
+  linestyle = '-.',
+  label = "Compute Roof"
+)
+
+plt.xlabel("Operational Intensity (MACs/DRAM byte)")
+plt.ylabel("Performance (MACs/Cycle)")
+plt.title("Roofline Model of Custom NN Accelerator")
+plt.legend()
+plt.grid(True, which="both")
+plt.savefig("plots/roofline.png")
+plt.close()
+
+print("Roofline plot saved to analysis/plots/roofline.png")
