@@ -27,12 +27,12 @@ int main()
   int burst_words = 16;
 
   // Tiling
-  int tile_m = 128, tile_n = 128;
+  int tile_m = 128, tile_n = 128; // put 8 for both for schedular validation
   int macs_per_tile = tile_m * tile_n;
 
   // Problem Size
-  int total_m = 256, total_n = 256;
-  int total_tiles = (total_m / tile_m) * (total_n / tile_n);
+  int total_m = 256, total_n = 256; // put 8 for both for schedular validation
+  int total_tiles = (total_m / tile_m) * (total_n / tile_n); // put 1 for schedular validation
 
   // Energy constants
   double ENERGY_PER_MAC = 1.0;
