@@ -13,3 +13,8 @@ as a reliable predictor for scheduling decisions.
 After adding K-reuse and SRAM capacity constraints, the scheduler still prefers
 small tiles due to dominant DRAM latency. This motivates explicit latency-hiding
 mechanisms such as double buffering in the next step.
+
+### Step 9.9 Observation
+
+Even with K-reuse and latency hiding, small workloads remain latency-bound.
+This motivates multi-tile and multi-operator scheduling to amortize startup costs.
