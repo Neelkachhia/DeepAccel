@@ -8,6 +8,7 @@ accelerator.
 
 ## Step 9.6 — Baseline Cost Model
 
+
 The initial scheduler modeled execution cost as:
 
     max(compute_cycles, dram_latency + transfer_cycles)
