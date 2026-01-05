@@ -1,5 +1,15 @@
-from ops import MatMul,ReLU
-from graph import Graph
+from DeepAccel.compiler.ops import MatMul,ReLU
+from DeepAccel.compiler.graph import Graph
+from DeepAccel.compiler.cost_model import CostAnnotator
+from DeepAccel.framework.scheduler import Scheduler
+
+scheduler = Scheduler(
+  total_pes = 16,
+  dram_bw = 4,
+  dram_latency = 200
+)
+
+annotator = CostAnnotator(scheduler)
 
 g = Graph()
 
@@ -14,5 +24,8 @@ g.add_node(mm1)
 g.add_node(relu1)
 g.add_node(mm2)
 
+annotator.annotate(g)
+
 g.dump()
 print("Total MACs in graph : ",g.total_macs())
+print("Total estimated cycles : ",g.total_cycles())

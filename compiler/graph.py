@@ -7,6 +7,13 @@ class Graph:
 
   def total_macs(self):
     return sum(node.macs() for node in self.nodes)
+  
+  def total_cycles(self):
+    return sum(
+      node.estimated_cycles
+      for node in self.nodes
+      if node.estimated_cycles is not None
+    )
 
   def dump(self):
     print("=== Graph ===")

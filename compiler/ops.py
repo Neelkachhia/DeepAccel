@@ -1,4 +1,4 @@
-from ir import IRNode
+from DeepAccel.compiler.ir import IRNode
 
 class MatMul(IRNode):
   def __init__(self, name, A_shape, B_shape):
