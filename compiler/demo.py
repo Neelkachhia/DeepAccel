@@ -3,6 +3,7 @@ from DeepAccel.compiler.graph import Graph
 from DeepAccel.compiler.cost_model import CostAnnotator
 from DeepAccel.framework.scheduler import Scheduler
 from DeepAccel.compiler.fusion import fuse_matmul_relu
+from DeepAccel.compiler.execution import GraphExecutionModel
 
 scheduler = Scheduler(
   total_pes = 16,
@@ -36,6 +37,11 @@ print("\n after fusion: ")
 g.dump()
 
 annotator.annotate(g)
+
+exec_model = GraphExecutionModel(dram_latency=200)
+graph_cycles = exec_model.estimate(g)
+
+print("Graph-level estimated cycles: ",graph_cycles)
 
 g.dump()
 print("Total MACs in graph : ",g.total_macs())
