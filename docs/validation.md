@@ -31,3 +31,12 @@ This leads to higher cycles per MAC.
 Although the absolute cycle counts differ, the normalized
 metrics clearly demonstrate the performance benefit of
 compiler-level fusion and pipelining.
+
+## Graphical Comparison
+
+The following figure shows a normalized comparison of
+cycles per MAC between the C++ simulator and the Python compiler.
+
+Lower cycles per MAC indicate higher computational efficiency.
+
+![Cycles per MAC Comparison](../analysis/compiler_vs_simulator_cycles_per_mac.png)
