@@ -4,7 +4,7 @@ class MatMul(IRNode):
   def __init__(self, name, A_shape, B_shape):
     M,K1 = A_shape
     K2,N = B_shape
-    assert K1 == K2, "Invalid MatMul shapes"
+    assert K1 == K2
     super().__init__(name, (M,N))
     self.A_shape = A_shape
     self.B_shape = B_shape
@@ -23,3 +23,19 @@ class ReLU(IRNode):
     for d in self.shape:
       total *= d
     return total
+
+class FusedMatMulReLU(IRNode):
+  def __init__(self, name, A_shape, B_shape):
+    M,K1 = A_shape
+    K2, N = B_shape
+    assert K1 == K2
+
+    super().__init__(name, (M,N))
+
+    self.A_shape = A_shape
+    self.B_shape = B_shape
+
+  def macs(self):
+    M,N = self.shape
+    K = self.A_shape[1]
+    return M*N*K
