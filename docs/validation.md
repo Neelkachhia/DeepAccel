@@ -39,4 +39,4 @@ cycles per MAC between the C++ simulator and the Python compiler.
 
 Lower cycles per MAC indicate higher computational efficiency.
 
-![Cycles per MAC Comparison](../analysis/compiler_vs_simulator_cycles_per_mac.png)
+![Cycles per MAC Comparison](../analysis/plots/compiler_vs_simulator_cycles_per_mac.png)
